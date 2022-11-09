@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+https://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop
+https://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/tx
+https://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/context
+https://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/mvc
+https://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+http://www.springframework.org/schema/util
+https://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!--通过静态工厂创建-->
+	<bean id="user-by-static-method" class="org.springframework.example.pojo.User"
+		  factory-method="createUser"/>
+
+	<bean id="user-by-instance-method" factory-bean="userFactory" factory-method="createUser"/>
+
+	<bean id="userFactory" class="org.springframework.beandemo.factory.UserFactory"/>
+
+	<bean id="user-by-factory-bean" class="org.springframework.beandemo.factory.UserFactoryBean"/>
+</beans>
