@@ -11,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class BeanInstantiationDemo {
 	public static void main(String[] args) {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("META-INF/bean-instantiation-context.xml");
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("META-INF/dependency/bean-instantiation-context.xml");
 		System.out.println(context.getBean("user-by-factory-bean"));
 	}
 }

@@ -1,5 +1,8 @@
 package org.springframework.dependency.lookup;
 
+import lombok.Data;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -27,6 +30,8 @@ public class ObjectProviderDemo {
 		lookUpByObjectProvider(context);
 		lookUpIfAvailable(context);
 		lookUpByStreamOps(context);
+		ObjectFactory bean = context.getBean(ObjectFactory.class);
+		System.out.println(bean.getObject());
 		context.close();
 	}
 
@@ -45,6 +50,25 @@ public class ObjectProviderDemo {
 	private static void lookUpByObjectProvider(ApplicationContext context) {
 		ObjectProvider<String> beanProvider = context.getBeanProvider(String.class);
 		System.out.println(beanProvider.getIfAvailable());
+	}
+
+	@Bean
+	public ObjectFactory<StaticUser> objectFactory() {
+		return new StaticUserObjectFactory();
+	}
+
+	@Data
+	static class StaticUser {
+		private String name;
+
+		public static StaticUser INSTANCE = new StaticUser();
+	}
+
+	static class StaticUserObjectFactory implements ObjectFactory<StaticUser> {
+		@Override
+		public StaticUser getObject() throws BeansException {
+			return StaticUser.INSTANCE;
+		}
 	}
 
 	@Bean

@@ -17,7 +17,7 @@ import org.springframework.example.repoistory.UseRepository;
 public class DependencyInjectDemo {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext
-				context = new ClassPathXmlApplicationContext("META-INF/application-inject.xml");
+				context = new ClassPathXmlApplicationContext("META-INF/dependency/application-inject.xml");
 		DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) context.getAutowireCapableBeanFactory();
 		UseRepository useRepository = beanFactory.getBean("userRepository", UseRepository.class);
 		System.out.println(useRepository.getBeanFactory() == beanFactory);

@@ -18,7 +18,7 @@ import java.util.ServiceLoader;
 public class SpecialBeanInstantiationDemo {
 	public static void main(String[] args) throws Exception {
 		ClassPathXmlApplicationContext context
-				= new ClassPathXmlApplicationContext("META-INF/special-bean-instantiation-context.xml");
+				= new ClassPathXmlApplicationContext("META-INF/dependency/special-bean-instantiation-context.xml");
 		AutowireCapableBeanFactory autowireCapableBeanFactory = context.getAutowireCapableBeanFactory();
 		// 通过AutowireCapableBeanFactory来创建对象
 		UserFactory userFactory = autowireCapableBeanFactory.createBean(DefaultUserFactory.class);
@@ -33,7 +33,7 @@ public class SpecialBeanInstantiationDemo {
 
 	private static void demoServiceLoader() {
 		ClassPathXmlApplicationContext context
-				= new ClassPathXmlApplicationContext("META-INF/special-bean-instantiation-context.xml");
+				= new ClassPathXmlApplicationContext("META-INF/dependency/special-bean-instantiation-context.xml");
 		ServiceLoader<UserFactory> load = ServiceLoader.load(UserFactory.class, Thread.currentThread().getContextClassLoader());
 		extracted(load);
 	}

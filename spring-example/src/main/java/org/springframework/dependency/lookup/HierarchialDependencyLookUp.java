@@ -51,7 +51,7 @@ public class HierarchialDependencyLookUp {
 
 	private static BeanFactory createParentBeanFactory() {
 		ClassPathXmlApplicationContext
-				context = new ClassPathXmlApplicationContext("META-INF/application-lookup.xml");
+				context = new ClassPathXmlApplicationContext("META-INF/dependency/application-lookup.xml");
 		return context.getBeanFactory();
 	}
 }
