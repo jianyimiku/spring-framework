@@ -3,6 +3,7 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:p="http://www.springframework.org/schema/p"
 	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:util="http://www.springframework.org/schema/util"
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:tx="http://www.springframework.org/schema/tx"
 	   xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -15,11 +16,22 @@ https://www.springframework.org/schema/tx/spring-tx.xsd
 http://www.springframework.org/schema/context
 https://www.springframework.org/schema/context/spring-context.xsd
 http://www.springframework.org/schema/mvc
-https://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+https://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+http://www.springframework.org/schema/util
+https://www.springframework.org/schema/util/spring-util.xsd">
 
 	<import resource="classpath:/META-INF/dependency/application-lookup.xml"/>
 
 	<bean id="userHolder" class="org.springframework.dependency.injection.UserHolder">
 		<property name="user" ref="user"/>
-	</bean>
+		<property name="configFileLocation" value="classpath:/META-INF/user-config.properties"/>
+		<property name="cities" value="1,2,3,4,5"/>
+<!--		<property name="lifeCities" value="1,2,3,4,5"/>-->
+		<property name="lifeCities">
+			<list>
+				<value>111</value>
+				<value>222</value>
+			</list>
+		</property>
+ 	</bean>
 </beans>
