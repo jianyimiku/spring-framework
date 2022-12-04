@@ -52,6 +52,9 @@ import org.springframework.util.ObjectUtils;
 @SuppressWarnings("serial")
 public class DependencyDescriptor extends InjectionPoint implements Serializable {
 
+	/**
+	 * 声明的Class 就是当前对象被注入的容器的Class
+	 */
 	private final Class<?> declaringClass;
 
 	@Nullable
@@ -67,6 +70,9 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 
 	private final boolean required;
 
+	/**
+	 * 对应@Lazy eager=false
+	 */
 	private final boolean eager;
 
 	private int nestingLevel = 1;
