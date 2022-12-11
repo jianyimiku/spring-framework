@@ -4,8 +4,10 @@ package org.springframework.dependency.injection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.example.pojo.User;
 
+import javax.inject.Inject;
 import java.util.Map;
 
 /**
@@ -15,11 +17,14 @@ import java.util.Map;
 public class AnnotationDependencyInjectionResolutionDemo {
 
 
-//	@Autowired // 实时注入 + 通过类型依赖查找(处理) + 字段名称("user")
+	@Autowired // 实时注入 + 通过类型依赖查找(处理) + 字段名称("user")
+	private User user;
+
+//	@Inject
 //	private User user;
 
-	@Autowired // 集合类型的依赖注入
-	private Map<String, User> users;
+//	@Autowired // 集合类型的依赖注入
+//	private Map<String, User> users;
 
 
 	public static void main(String[] args) {
@@ -29,7 +34,7 @@ public class AnnotationDependencyInjectionResolutionDemo {
 		applicationContext.refresh();
 		AnnotationDependencyInjectionResolutionDemo demo
 				= applicationContext.getBean(AnnotationDependencyInjectionResolutionDemo.class);
-//		System.out.println(demo.user);
+		System.out.println(demo.user);
 		applicationContext.close();
 
 	}

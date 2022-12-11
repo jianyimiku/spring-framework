@@ -68,6 +68,8 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
+import javax.inject.Inject;
+
 /**
  * {@link org.springframework.beans.factory.config.BeanPostProcessor BeanPostProcessor}
  * implementation that autowires annotated fields, setter methods, and arbitrary
@@ -156,6 +158,8 @@ public class AutowiredAnnotationBeanPostProcessor implements SmartInstantiationA
 	 * standard {@link Autowired @Autowired} and {@link Value @Value} annotations.
 	 * <p>Also supports JSR-330's {@link javax.inject.Inject @Inject} annotation,
 	 * if available.
+	 *
+	 * 初始化的时候就会构造出支持哪些注解的自动注入
 	 */
 	@SuppressWarnings("unchecked")
 	public AutowiredAnnotationBeanPostProcessor() {
@@ -243,6 +247,7 @@ public class AutowiredAnnotationBeanPostProcessor implements SmartInstantiationA
 
 	@Override
 	public void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, Class<?> beanType, String beanName) {
+		// 查找出当前类需要自动注入的域
 		InjectionMetadata metadata = findAutowiringMetadata(beanName, beanType, null);
 		metadata.checkConfigMembers(beanDefinition);
 	}
@@ -638,6 +643,7 @@ public class AutowiredAnnotationBeanPostProcessor implements SmartInstantiationA
 			else {
 				value = resolveFieldValue(field, bean, beanName);
 			}
+			// 通过反射的方式将Value注入到字段中
 			if (value != null) {
 				ReflectionUtils.makeAccessible(field);
 				field.set(bean, value);
