@@ -141,6 +141,9 @@ import org.springframework.util.StringValueResolver;
  * @see #setResourceFactory
  * @see org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor
  * @see org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor
+ *
+ *
+ * 标准注解处理
  */
 @SuppressWarnings("serial")
 public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBeanPostProcessor
@@ -201,6 +204,7 @@ public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBean
 	 * respectively.
 	 */
 	public CommonAnnotationBeanPostProcessor() {
+		// 优先级倒数第四位
 		setOrder(Ordered.LOWEST_PRECEDENCE - 3);
 		setInitAnnotationType(PostConstruct.class);
 		setDestroyAnnotationType(PreDestroy.class);
@@ -372,7 +376,7 @@ public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBean
 		Class<?> targetClass = clazz;
 
 		do {
-			final List<InjectionMetadata.InjectedElement> currElements = new ArrayList<>();
+				final List<InjectionMetadata.InjectedElement> currElements = new ArrayList<>();
 
 			ReflectionUtils.doWithLocalFields(targetClass, field -> {
 				if (webServiceRefClass != null && field.isAnnotationPresent(webServiceRefClass)) {

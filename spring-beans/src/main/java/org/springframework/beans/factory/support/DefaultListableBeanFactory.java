@@ -1306,6 +1306,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			return new Jsr330Factory().createDependencyProvider(descriptor, requestingBeanName);
 		}
 		else {
+			// @Lazy注解会进行一个代理增强
 			Object result = getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary(
 					descriptor, requestingBeanName);
 			if (result == null) {
@@ -1485,10 +1486,12 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		// 如果type是Map对象
 		else if (Map.class == type) {
 			ResolvableType mapType = descriptor.getResolvableType().asMap();
+			// 解析key类型
 			Class<?> keyType = mapType.resolveGeneric(0);
 			if (String.class != keyType) {
 				return null;
 			}
+			// 解析Value类型
 			Class<?> valueType = mapType.resolveGeneric(1);
 			if (valueType == null) {
 				return null;

@@ -150,6 +150,7 @@ public class InitDestroyAnnotationBeanPostProcessor
 		metadata.checkConfigMembers(beanDefinition);
 	}
 
+	// 在Bean初始化之前进行invokeInitMethods调用
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 		LifecycleMetadata metadata = findLifecycleMetadata(bean.getClass());
@@ -276,8 +277,10 @@ public class InitDestroyAnnotationBeanPostProcessor
 
 		private final Class<?> targetClass;
 
+		// 初始化方法
 		private final Collection<LifecycleElement> initMethods;
 
+		// 销毁方法
 		private final Collection<LifecycleElement> destroyMethods;
 
 		@Nullable

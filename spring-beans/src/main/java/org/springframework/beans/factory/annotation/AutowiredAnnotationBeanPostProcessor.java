@@ -129,6 +129,8 @@ import javax.inject.Inject;
  * @see #setAutowiredAnnotationType
  * @see Autowired
  * @see Value
+ *
+ * Autowire自动注入处理
  */
 public class AutowiredAnnotationBeanPostProcessor implements SmartInstantiationAwareBeanPostProcessor,
 		MergedBeanDefinitionPostProcessor, PriorityOrdered, BeanFactoryAware {
